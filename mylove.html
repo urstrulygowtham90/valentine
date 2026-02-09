@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valentine 💖</title>
+
+  <style>
+    body {
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    .box {
+      width: 90%;
+      max-width: 400px;
+      background: white;
+      padding: 25px 20px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      text-align: center;
+      position: relative;
+    }
+
+    .val-img {
+      width: 100%;
+      max-width: 220px;
+      border-radius: 15px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 22px;
+      color: #ff4d6d;
+      margin-bottom: 20px;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 14px 26px;
+      font-size: 18px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+    }
+
+    #yes {
+      background: #ff4d6d;
+      color: white;
+    }
+
+    #no {
+      background: #ccc;
+      position: absolute;
+      left: 55%;
+      top: 70%;
+    }
+
+    .heart {
+      position: fixed;
+      font-size: 26px;
+      animation: float 3s linear forwards;
+    }
+
+    @keyframes float {
+      from { transform: translateY(0); opacity: 1; }
+      to { transform: translateY(-300px); opacity: 0; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="box" id="box">
+    <!-- 🔽 Change image name if needed -->
+    <img src="couple.png" alt="Valentine" class="val-img">
+
+    <h1 id="question"></h1>
+
+    <div class="buttons">
+      <button id="yes" onclick="yesClicked()">Yes ❤️</button>
+      <button id="no" ontouchstart="moveNo()" onmouseover="moveNo()">No 💔</button>
+    </div>
+  </div>
+
+  <script>
+    const name = "Monika"; // ✨ CHANGE NAME HERE ✨
+
+    document.getElementById("question").innerText =
+      `Hey ${name}, will you be my Valentine? 💖`;
+
+    function moveNo() {
+      const noBtn = document.getElementById("no");
+      const box = document.querySelector(".box");
+      const boxRect = box.getBoundingClientRect();
+
+      const x = Math.random() * (boxRect.width - 90);
+      const y = Math.random() * (boxRect.height - 50);
+
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    }
+
+    function yesClicked() {
+      document.getElementById("box").innerHTML = `
+        <img src="celebrate.png" class="val-img">
+        <h1>🎉 ${name}, that’s the best decision you’ve ever taken in your life ❤️😎</h1>
+        <p style="color:#ff4d6d;font-size:18px;">
+          Thank you monammathalli 💖🥰
+        </p>
+      `;
+      hearts();
+    }
+
+    function hearts() {
+      for (let i = 0; i < 25; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.bottom = "0px";
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 3000);
+      }
+    }
+  </script>
+
+</body>
+</html>
